@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: black;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      
+    }
+    .con{
+       border:1px thick black;
+       height: 500px;
+       width:400px;
+       border-radius: 5px;
+       background: rgba(0, 0, 0, 0.4);
+
+    }
+
+    input[type="date"] {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      background: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #ddd;
+    }
+
+    .result {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+      gap: 20px;
+    }
+
+    .box {
+      background: black;
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      width: 80px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .box span {
+      display: block;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+    <div class="con">
+
+  <div class="container">
+    <input type="date" id="dob">
+    <button onclick="calculateAge()">Calculate</button>
+  </div>
+
+  <div class="result">
+    <div class="box">
+      <span id="years">-</span>
+      Years
+    </div>
+    <div class="box">
+      <span id="months">-</span>
+      Months
+    </div>
+    <div class="box">
+      <span id="days">-</span>
+      Days
+    </div>
+  </div>
+ </div> 
+
+  <script>
+    function calculateAge() {
+      let dob = document.getElementById("dob").value;
+      if (dob === "") {
+        alert("Please select your date of birth!");
+        return;
+      }
+
+      let birthDate = new Date(dob);
+      let today = new Date();
+
+      let years = today.getFullYear() - birthDate.getFullYear();
+      let months = today.getMonth() - birthDate.getMonth();
+      let days = today.getDate() - birthDate.getDate();
+
+      // Adjust months and days if negative
+      if (days < 0) {
+        months--;
+        let prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+        days += prevMonth.getDate();
+      }
+
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      // Show results
+      document.getElementById("years").textContent = years;
+      document.getElementById("months").textContent = months;
+      document.getElementById("days").textContent = days;
+    }
+  </script>
+
+</body>
+</html>
